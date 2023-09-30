@@ -9,6 +9,8 @@ public class BlockBehaviour : MonoBehaviour
     private Rigidbody _rigidbody;
     private Renderer _renderer;
 
+    public GameController gameController;
+
     private const float FLASH_PERIOD = 0.05f;
     private float flashCooldown;
 
@@ -81,5 +83,13 @@ public class BlockBehaviour : MonoBehaviour
     {
         ((ConnectComponent)GetComponent(BaseComponent.ComponentType.Connect)).DisconnectAll();
         Destroy(gameObject);
+        ReportPlayerLoss();
+    }
+
+    private void ReportPlayerLoss()
+    {
+        if (gameController != null) {
+            gameController.Lose();
+        }
     }
 }

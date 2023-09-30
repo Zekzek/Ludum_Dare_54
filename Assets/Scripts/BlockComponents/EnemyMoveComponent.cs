@@ -5,8 +5,8 @@ public class EnemyMoveComponent : BaseComponent
 {
     public override ComponentType Type => ComponentType.Move;
 
-    [SerializeField] private float speed;
-    [SerializeField] private GameObject target;
+    [SerializeField] private float _speed;
+    [SerializeField] private GameObject _target;
 
     private NavMeshAgent _agent;
 
@@ -14,11 +14,16 @@ public class EnemyMoveComponent : BaseComponent
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = speed;
+        _agent.speed = _speed;
     }
 
     private void Update()
     {
-        _agent.SetDestination(target.transform.position);
+        if (_target == null) {
+
+        }
+        else {
+            _agent.SetDestination(_target.transform.position);
+        }
     }
 }

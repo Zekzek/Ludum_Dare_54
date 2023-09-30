@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private GameObject _target;
+    [SerializeField] private Vector3 _offset;
+
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+    }
 
     private void Update()
     {
-        transform.position = target.transform.position + offset;
+        if (_target != null) {
+            transform.position = _target.transform.position + _offset;
+        }
     }
 }

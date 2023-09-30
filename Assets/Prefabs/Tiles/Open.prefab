@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2488557382335546071}
   m_Layer: 0
-  m_Name: Center
+  m_Name: Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 136156600187442080}
   - component: {fileID: 9184535534471415705}
   m_Layer: 0
-  m_Name: Center-Floor
+  m_Name: Open-Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 192a3fceb3443914cb19fa7cc3019e44, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 22dced7cc8a49b34da3365822878ba3b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &7404932323162905114
 PrefabInstance:

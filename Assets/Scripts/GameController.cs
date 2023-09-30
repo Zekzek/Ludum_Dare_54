@@ -7,8 +7,18 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        AddTile(0, 0, _tileOptions[0]);
-        AddTile(0, 1, _tileOptions[0]);
+        for (int x = -5; x <= 5; x++) {
+            for (int z = -5; z <= 5; z++) {
+                if (x == 0 && z == 0) {
+                    // Starting tile
+                    AddNorthConnector(x, z);
+                    AddEastConnector(x, z);
+                }
+                else {
+                    AddTile(x, z, _tileOptions[Random.Range(0, _tileOptions.Length)]);
+                }
+            }
+        }
     }
 
     private void AddTile(int x, int z, GameObject prefab)

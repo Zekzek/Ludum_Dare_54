@@ -43,13 +43,13 @@ public class GameController : MonoBehaviour
 
     private void GenerateAllTiles()
     {
-        for (int x = -1; x <= 10; x++) {
-            for (int z = -1; z <= 10; z++) {
+        for (int x = -1; x <= 5; x++) {
+            for (int z = -1; z <= 5; z++) {
                 if (x == 0 && z == 0) {
                     // Starting tile
                     AddNorthConnector(x, z);
                     AddEastConnector(x, z);
-                } else if (x == 9 && z == 9) {
+                } else if (x == 4 && z == 4) {
                     // Goal tile
                     AddNorthConnector(x, z);
                     AddEastConnector(x, z);

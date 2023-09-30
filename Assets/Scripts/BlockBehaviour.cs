@@ -48,6 +48,7 @@ public class BlockBehaviour : MonoBehaviour
             _rigidbody.angularVelocity = Vector3.zero;
             _rigidbody.drag = 5;
             _rigidbody.angularDrag = 50;
+            _rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         }
     }
 

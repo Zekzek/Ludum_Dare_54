@@ -31,13 +31,17 @@ public class ConnectComponent : BaseComponent
     public void Connect(ConnectComponent other) {
         if (Core == null && other.Core != null) {
             other.Core.Add(this);
+            gameObject.tag = other.gameObject.tag;
         } else if (Core != null && other.Core == null) {
             Core.Add(other);
+            other.gameObject.tag = gameObject.tag;
         }
     }
 
     public void DisconnectAll()
     {
+        gameObject.tag = "Untagged";
+
         foreach (Connection connection in _connections) {
             connection.Disconnect();
         }

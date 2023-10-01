@@ -10,10 +10,62 @@ public class GameController : MonoBehaviour
     [SerializeField] private BlockBehaviour _playerPrefab;
     [SerializeField] private Follow _followCamera;
     [SerializeField] private Win _win;
+    [SerializeField] private GameObject _infoPanel;
+
+    [SerializeField] private BlockBehaviour _enemyPrefab;
+    [SerializeField] private BlockBehaviour[] _powerupPrefabs;
+
+    private static float ENEMY_SPAWN_PERIOD = 4.3f;
+    private const float POWERUP_SPAWN_PERIOD = 0.7f;
+
+    private BlockBehaviour _player;
+    private float _enemySpawnCooldown;
+    private float _powerupSpawnCooldown;
 
     public void Start()
     {
         Time.timeScale = 0f;
+    }
+
+    public void Update()
+    {
+        _enemySpawnCooldown -= Time.deltaTime;
+        _powerupSpawnCooldown -= Time.deltaTime;
+
+        if (_enemySpawnCooldown <= 0) {
+            _enemySpawnCooldown += ENEMY_SPAWN_PERIOD;
+            SpawnEnemy();
+        }
+
+        if (_powerupSpawnCooldown <= 0) {
+            _powerupSpawnCooldown += POWERUP_SPAWN_PERIOD;
+            SpawnPowerup();
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        if (_player != null) {
+            BlockBehaviour enemy = Instantiate(_enemyPrefab, GenerateNearbyPosition(), Quaternion.identity, transform);
+            ((EnemyMoveComponent)enemy.GetComponent(BaseComponent.ComponentType.Move)).Target = _player.gameObject;
+        }
+    }
+
+    private void SpawnPowerup()
+    {
+        if (_player != null) {
+            Instantiate(_powerupPrefabs[Random.Range(0, _powerupPrefabs.Length)], GenerateNearbyPosition(), Quaternion.identity, transform);
+        }
+    }
+
+    private Vector3 GenerateNearbyPosition()
+    {
+        Vector2 point = 25 * Random.insideUnitCircle.normalized;
+        Vector3 position = _player.transform.position + new Vector3(point.x, 0f, point.y);
+        if (position.x < -10 || position.x > 100 || position.z < -10 || position.z > 100) {
+            return GenerateNearbyPosition();
+        }
+        return position;
     }
 
     public void Win()
@@ -24,6 +76,13 @@ public class GameController : MonoBehaviour
     public void Lose()
     {
         ShowMenu(false);
+    }
+
+    public void ShowInfo()
+    {
+        _infoPanel.SetActive(!_infoPanel.gameObject.activeSelf);
+        _victoryText.SetActive(false);
+        _defeatText.SetActive(false);
     }
 
     public void StartNewGame()
@@ -62,9 +121,9 @@ public class GameController : MonoBehaviour
 
     private void GeneratePlayer()
     {
-        BlockBehaviour player = Instantiate(_playerPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
-        _followCamera.SetTarget(player.gameObject);
-        player.gameController = this;
+        _player = Instantiate(_playerPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
+        _followCamera.SetTarget(_player.gameObject);
+        _player.gameController = this;
         _win.gameController = this;
     }
 
@@ -77,6 +136,7 @@ public class GameController : MonoBehaviour
     private void ShowMenu(bool isWin)
     {
         _mainMenu.gameObject.SetActive(true);
+        _infoPanel.SetActive(false);
         _victoryText.SetActive(isWin);
         _defeatText.SetActive(!isWin);
         Time.timeScale = 0f;

@@ -10,11 +10,13 @@ public class ArmorComponent : BaseComponent
 
     public void Damage(float amount)
     {
-        blockBehaviour.DamageFlash();
-        _armor -= amount;
-        if (!dead && _armor < 0) {
-            dead = true;
-            blockBehaviour.SelfDestruct();
+        if (blockBehaviour != null) {
+            blockBehaviour.DamageFlash();
+            _armor -= amount;
+            if (!dead && _armor < 0) {
+                dead = true;
+                blockBehaviour.SelfDestruct();
+            }
         }
     }
 }

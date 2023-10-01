@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveComponent : BaseComponent
@@ -10,13 +9,16 @@ public class MoveComponent : BaseComponent
     private void Update()
     {
         if (Input.GetKey(KeyCode.W)) {
-            blockBehaviour.Move(Vector3.forward * speed);
-        } else if (Input.GetKey(KeyCode.A)) {
-            blockBehaviour.Move(Vector3.left * speed);
-        } else if (Input.GetKey(KeyCode.S)) {
-            blockBehaviour.Move(Vector3.back * speed);
-        } else if (Input.GetKey(KeyCode.D)) {
-            blockBehaviour.Move(Vector3.right * speed);
+            blockBehaviour.Move(transform.forward * speed);
+        }
+        else if (Input.GetKey(KeyCode.S)) {
+            blockBehaviour.Move(-transform.forward * speed);
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            transform.Rotate(new Vector3(0, -150 * Time.deltaTime, 0), Space.Self);
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            transform.Rotate(new Vector3(0, 150 * Time.deltaTime, 0), Space.Self);
         }
     }
 }

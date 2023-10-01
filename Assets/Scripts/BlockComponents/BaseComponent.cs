@@ -7,7 +7,8 @@ public abstract class BaseComponent : MonoBehaviour
         Core,
         Armor,
         Move,
-        Connect
+        Connect,
+        Weapon
     }
 
     public BlockBehaviour blockBehaviour { get; protected set; }

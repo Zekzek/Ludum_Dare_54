@@ -6,7 +6,8 @@ public class EnemyMoveComponent : BaseComponent
     public override ComponentType Type => ComponentType.Move;
 
     [SerializeField] private float _speed;
-    [SerializeField] private GameObject _target;
+
+    public GameObject Target { get; set; }
 
     private NavMeshAgent _agent;
 
@@ -19,11 +20,13 @@ public class EnemyMoveComponent : BaseComponent
 
     private void Update()
     {
-        if (_target == null) {
-
-        }
-        else {
-            _agent.SetDestination(_target.transform.position);
+        if (Target != null) {
+            try {
+                _agent.SetDestination(Target.transform.position);
+            } catch { 
+                Target = null;
+                blockBehaviour.SelfDestruct();
+            }
         }
     }
 }

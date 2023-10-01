@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 3341409284253349469}
   - component: {fileID: 1427722119590385770}
   - component: {fileID: 8500741704403533683}
+  - component: {fileID: 1111548912046269410}
   - component: {fileID: 1018450084442025327}
   - component: {fileID: 659454204340465952}
   m_Layer: 0
@@ -115,6 +116,8 @@ MonoBehaviour:
   - {fileID: 3341409284253349469}
   - {fileID: 1427722119590385770}
   - {fileID: 8500741704403533683}
+  - {fileID: 1111548912046269410}
+  gameController: {fileID: 0}
 --- !u!114 &5521019601814567825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +173,22 @@ MonoBehaviour:
   - {fileID: 5977768669042203174}
   - {fileID: 2936497821571689069}
   - {fileID: 4507483246009261714}
+--- !u!114 &1111548912046269410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592201486883330569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bafc51db8283da438565127db450852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagePeriod: 0.5
+  _damageAmount: 1
+  _range: 1
+  _maximumNumberTargets: 100
 --- !u!33 &1018450084442025327
 MeshFilter:
   m_ObjectHideFlags: 0
